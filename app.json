@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "UBS",
+    "slug": "UBS",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "splash": {
+      "image": "./src/assets/splashscreen.png",
+      "backgroundColor": "#5CC6BA",
+      "resizeMode": "cover"
+    }
+  }
+}
