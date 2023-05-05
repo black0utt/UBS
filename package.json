@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
+<<<<<<< HEAD
     "@react-native-community/async-storage": "^1.12.1",
+=======
+    "@expo/vector-icons": "^13.0.0",
+>>>>>>> 695a479ede77f6bc4e2364c98ca55fff9b632da1
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "expo": "^46.0.21",

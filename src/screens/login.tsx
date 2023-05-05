@@ -11,17 +11,22 @@ export function Login() {
   const img = require('../assets/logop.png');
 
   const navigation = useNavigation();
+  
   function telaCadastrar(){
     navigation.navigate('registration');
   }
+  
+  function telaInicio(){
+    navigation.navigate('inicio');
+  }
+
+
   return (
     <VStack flex={1} p={6} bg='white'>
             <HStack
                 w="full"
                 justifyContent="space-between"
                 alignItems="center"
-                
-              
                 pb={5}
                 px={50}
             >
@@ -32,8 +37,6 @@ export function Login() {
                 <Center>
                   <Image source={img} />
                 </Center>
-                
-
             </HStack>
 
         <VStack flex={1} px={6}>
@@ -47,17 +50,17 @@ export function Login() {
           </HStack>
           <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
           <Input
-                
                 placeholder="SENHA"
                 mt={4}
                 bg='cor4'
             />
           </HStack>
           <HStack>
-            <Button title="Acessar" w="full" bg="cor1" borderRadius={100}/>
+            <Button title="Acessar" w="full" bg="green.500" borderRadius={100} onPress={telaInicio}/>
           </HStack>
           <HStack>
-            <Button mt={80}title="Cadastrar" w="full" bg="cor1" borderRadius={100} onPress={telaCadastrar}/>
+            <Button mt={16}title="Cadastrar" w="full" bg="green.500" borderRadius={100} onPress={telaCadastrar}/>
+            {/* <Button mt={80}title="Cadastrar" w="full" bg="cor1" borderRadius={100} onPress={telaCadastrar}/> */}
           </HStack>
 
         </VStack>
