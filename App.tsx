@@ -1,5 +1,9 @@
 
 import { NativeBaseProvider, StatusBar} from 'native-base';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from './firebaseconfig';
+
 // import { useFonts, Roboto_400Regular, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import {
   useFonts,

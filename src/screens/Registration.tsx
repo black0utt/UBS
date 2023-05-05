@@ -2,13 +2,41 @@ import { VStack, Input, HStack, IconButton, useTheme, Center} from 'native-base'
 import { SignOut, ChatTeardropText, House} from 'phosphor-react-native';
 // import Logo from '../assets/logo_secondary.svg';
 import {Button} from '../components/Button';
-import {Image} from 'react-native';
-import React from 'react';
+import {Image, Text, TextInput} from 'react-native';
+import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native'
+
+//firebaseimport
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../firebaseconfig';
+
+
+
 export function Registration() {
 
   const { colors } = useTheme();
   const img = require('../assets/logop.png');
+
+  const [email, setEmail] = useState<string>('');
+  const [senha, setSenha] = useState<string>('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleCreateAcount = () => {
+    createUserWithEmailAndPassword(auth, email, senha)
+    .then((userCredential) => {
+      alert('Conta criada com sucesso!!')
+      const user = userCredential.user;
+      console.log(user)
+      navigation.navigate('login');
+    })
+    .catch(error => {
+      console.log(email)
+      console.log(error)
+    })
+  }
 
   const navigation = useNavigation();
   function telaLogin(){
@@ -28,7 +56,7 @@ export function Registration() {
       <VStack flex={1} px={6}>
 
         <HStack w="full" justifyContent="space-between" alignItems="center">
-          <Input placeholder="CPF" mt={4} bg='cor4'/>
+          <Input onChangeText={(novoEmail) => setEmail(novoEmail)} placeholder="CPF" mt={4} bg='cor4'/>
         </HStack>
 
         <HStack w="full"  justifyContent="space-between" alignItems="center">
@@ -36,7 +64,7 @@ export function Registration() {
         </HStack>
     
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
-          <Input placeholder="SENHA" mt={4} bg='cor4'/>
+          <Input onChangeText={(novaSenha) => setSenha(novaSenha)} placeholder="SENHA" mt={4} bg='cor4'/>
         </HStack>
 
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
@@ -44,7 +72,7 @@ export function Registration() {
         </HStack>
 
         <HStack>
-          <Button title="Cadastrar" w="full" bg="cor1" borderRadius={100}/>
+          <Button onPress={handleCreateAcount} title="Cadastrar" w="full" bg="cor1" borderRadius={100}/>
         </HStack>
 
         <HStack mt={230}>
