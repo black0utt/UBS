@@ -10,11 +10,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
-<<<<<<< HEAD
-    "@react-native-community/async-storage": "^1.12.1",
-=======
     "@expo/vector-icons": "^13.0.0",
->>>>>>> 695a479ede77f6bc4e2364c98ca55fff9b632da1
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "expo": "^46.0.21",
@@ -32,7 +28,9 @@
     "react-native-screens": "~3.15.0",
     "react-native-svg": "12.3.0",
     "react-native-web": "~0.18.10",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "@react-native-async-storage/async-storage": "~1.17.3",
+    "expo-local-authentication": "~12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

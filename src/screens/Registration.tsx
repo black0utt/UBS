@@ -6,6 +6,7 @@ import {Image, Text, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native'
 
+
 //firebaseimport
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
@@ -50,7 +51,6 @@ export function Registration() {
         <Center>
           <Image source={img} />
         </Center>
-        <IconButton icon={<SignOut size={26} color={colors.gray[300]} />}/>
       </HStack>
     
       <VStack flex={1} px={6}>
@@ -72,11 +72,11 @@ export function Registration() {
         </HStack>
 
         <HStack>
-          <Button onPress={handleCreateAcount} title="Cadastrar" w="full" bg="cor1" borderRadius={100}/>
+          <Button onPress={handleCreateAcount} title="Cadastrar" w="full" bg="green.500" borderRadius={100}/>
         </HStack>
 
         <HStack mt={230}>
-          <Button title="Login" w="full" bg="cor1" borderRadius={100} onPress={telaLogin}/>
+          <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={telaLogin}/>
         </HStack>
 
       </VStack>

@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 // import { SignOut, ChatTeardropText } from 'phosphor-react-native';
 // import Logo from '../assets/logo_secondary.svg';
 import {Button} from '../components/Button';
-import {Image} from 'react-native';
+import {Image, SafeAreaView} from 'react-native';
 import React from 'react';
 export function Inicio() {
 
@@ -22,7 +22,8 @@ export function Inicio() {
 
   return (
     
-    <VStack flex={1} p={6} bg='white'>
+    
+    <VStack flex={1} p={6} pt={20} bg='white'>
         <HStack
             w="full"
             justifyContent="space-between"

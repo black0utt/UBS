@@ -1,16 +1,71 @@
-import { VStack, Input, HStack, useTheme, Center} from 'native-base';
+import { VStack, Input, HStack, useTheme, Center, View, FormControl} from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 // import { SignOut, ChatTeardropText } from 'phosphor-react-native';
 // import Logo from '../assets/logo_secondary.svg';
 import {Button} from '../components/Button';
-import {Image} from 'react-native';
-import React from 'react';
+import {Image, Platform, Alert, Text, TouchableOpacity, Modal, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+
+import * as LocalAuthentication from 'expo-local-authentication'
 export function Login() {
 
   const { colors } = useTheme();
   const img = require('../assets/logop.png');
 
   const navigation = useNavigation();
+
+  // const Example = () => {
+  //   const [showModal, setShowModal] = useState(false);
+  //   return <Center>
+  //       <Button onPress={() => setShowModal(true)} title={''}>Button</Button>
+  //       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+  //         <Modal.Content maxWidth="400px">
+  //           <Modal.CloseButton />
+  //           <Modal.Header>Contact Us</Modal.Header>
+  //           <Modal.Body>
+  //             <FormControl>
+  //               <FormControl.Label>Name</FormControl.Label>
+  //               <Input />
+  //             </FormControl>
+  //             <FormControl mt="3">
+  //               <FormControl.Label>Email</FormControl.Label>
+  //               <Input />
+  //             </FormControl>
+  //           </Modal.Body>
+  //           <Modal.Footer>
+
+  //               <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+  //               setShowModal(false);
+  //             } } title={''}>
+  //                 Cancel
+  //               </Button>
+  //               <Button onPress={() => {
+  //               setShowModal(false);
+  //             } } title={''}>
+  //                 Save
+  //               </Button>
+
+  //           </Modal.Footer>
+  //         </Modal.Content>
+  //       </Modal>
+  //     </Center>;
+  // };
+
+  async function authenticate(){
+    const hasPassword = await LocalAuthentication.isEnrolledAsync();
+
+    if(!hasPassword) return;
+
+    const { success } = await LocalAuthentication.authenticateAsync();
+
+    if (success) {
+      Alert.alert('Autenticação realizada com sucesso');
+    } else {
+      Alert.alert('A autenticação falou. Por favor, digite sua senha!');
+    }
+  }
+
+  Platform.OS == 'ios' && authenticate()
   
   function telaCadastrar(){
     navigation.navigate('registration');
@@ -64,6 +119,28 @@ export function Login() {
           </HStack>
 
         </VStack>
+      {/* {
+        Platform.OS == 'android' && (
+          <View>
+            <Modal
+              animationType='slide'
+              transparent={true}
+              visible
+              onShow={authenticate}
+            >
+
+              <TouchableOpacity onPress={() => {
+                LocalAuthentication.cancelAuthenticate
+              }}>
+              </TouchableOpacity>
+            </Modal>
+          </View>
+
+            // Example()
+        )
+
+        
+      } */}
 
 
     </VStack>

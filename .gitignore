@@ -14,8 +14,4 @@ web-build/
 .DS_Store
 
 # Temporary files created by Metro to check the health of the file watcher
-<<<<<<< HEAD
 .metro-health-check*
-=======
-.metro-health-check*
->>>>>>> 695a479ede77f6bc4e2364c98ca55fff9b632da1
