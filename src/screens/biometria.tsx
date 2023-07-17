@@ -1,11 +1,19 @@
-import { HStack, VStack, useTheme, Text, Center } from "native-base";
+import { HStack, VStack, useTheme, Text, Center} from "native-base";
 import React from 'react';
 import { Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import {Button} from '../components/Button';
 
 export function Biometria() {
 
+    const navigation = useNavigation();
+
     const { colors } = useTheme();
     const img = require('../assets/logop.png');
+
+    function telaLogin(){
+        navigation.navigate('login');
+      }
 
 
     return (
@@ -26,7 +34,13 @@ export function Biometria() {
                 <Image source={img} />
                 </Center>
             </HStack>
+            <VStack>
+                <HStack>
+                    <Button mt={16} title="Testar biometria" w="full" bg="green.500" borderRadius={100} onPress={telaLogin}/>
+                </HStack>
+            </VStack>
         </VStack>
+
     )
 
 }

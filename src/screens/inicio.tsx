@@ -16,7 +16,10 @@ export function Inicio() {
     const navigation = useNavigation();
 
     function logout(){
-        navigation.navigate('login')
+        navigation.navigate('biometria')
+    }
+    function cadastrarAtend(){
+      navigation.navigate('solicitarAtendimento')
     }
 
 
@@ -43,7 +46,7 @@ export function Inicio() {
 
         <VStack flex={1} px={4}>
           <HStack w="full" mt={150} justifyContent="space-between" alignItems="center">
-            <Button title="Solicitar atendimento" w="full" bg="green.500" borderRadius={100}/>
+            <Button title="Solicitar atendimento" w="full" bg="green.500" borderRadius={100} onPress={cadastrarAtend}/>
           </HStack>
           <HStack w="full" mt={4} justifyContent="space-between" alignItems="center">
             <Button title="Listar Atendimentos" w="full" bg="green.500" borderRadius={100}/>

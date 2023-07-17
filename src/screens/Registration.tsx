@@ -3,7 +3,7 @@ import { SignOut, ChatTeardropText, House} from 'phosphor-react-native';
 // import Logo from '../assets/logo_secondary.svg';
 import {Button} from '../components/Button';
 import {Image, Text, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../firebaseconfig';
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore"; 
 
 
 
@@ -21,10 +22,13 @@ export function Registration() {
 
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
+  const [login, setLogin] = useState<string>('')
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
 
+  
   const handleCreateAcount = () => {
     createUserWithEmailAndPassword(auth, email, senha)
     .then((userCredential) => {
@@ -43,6 +47,13 @@ export function Registration() {
   function telaLogin(){
     navigation.navigate('login');
   }
+
+  function testar(){
+    const usuarios = collection(db, "usuarios");
+     setDoc(doc(usuarios, email), {
+      login: login,
+      senha: senha});
+  }
   return (
 
     <VStack flex={1} p={6} bg='white'>
@@ -60,7 +71,7 @@ export function Registration() {
         </HStack>
 
         <HStack w="full"  justifyContent="space-between" alignItems="center">
-          <Input placeholder="LOGIN" mt={4} bg='cor4'/>
+          <Input onChangeText={(novoLogin) => setLogin(novoLogin)} placeholder="LOGIN" mt={4} bg='cor4'/>
         </HStack>
     
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
@@ -77,6 +88,9 @@ export function Registration() {
 
         <HStack mt={230}>
           <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={telaLogin}/>
+        </HStack>
+        <HStack>
+          <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={testar}/>
         </HStack>
 
       </VStack>

@@ -59,7 +59,8 @@ export function Login() {
     const { success } = await LocalAuthentication.authenticateAsync();
 
     if (success) {
-      Alert.alert('Autenticação realizada com sucesso');
+      Alert.alert('Autenticação realizada com sucesso')
+      navigation.navigate('inicio')
     } else {
       Alert.alert('A autenticação falou. Por favor, digite sua senha!');
     }
@@ -119,7 +120,7 @@ export function Login() {
           </HStack>
 
         </VStack>
-      {/* {
+      {
         Platform.OS == 'android' && (
           <View>
             <Modal
@@ -140,7 +141,7 @@ export function Login() {
         )
 
         
-      } */}
+      }
 
 
     </VStack>

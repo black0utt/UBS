@@ -4,6 +4,8 @@ export declare global {
             login: undefined;
             registration: undefined;
             inicio: undefined;
+            biometria: undefined;
+            solicitarAtendimento: undefined;
         }
     }
 }
