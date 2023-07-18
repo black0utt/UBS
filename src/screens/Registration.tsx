@@ -22,25 +22,38 @@ export function Registration() {
 
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
-  const [login, setLogin] = useState<string>('')
+  const [login, setLogin] = useState<string>('');
+  const [confirmaSenha, setConfirmaSenha] = useState<string>('');
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
   
-  const handleCreateAcount = () => {
-    createUserWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) => {
-      alert('Conta criada com sucesso!!')
-      const user = userCredential.user;
-      console.log(user)
-      navigation.navigate('login');
-    })
-    .catch(error => {
-      console.log(email)
-      console.log(error)
-    })
+  const handleCreateAcount = async () => {
+    if (senha == confirmaSenha){
+      createUserWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        alert('Conta criada com sucesso!!')
+        const user = userCredential.user;
+        console.log(user)
+        navigation.navigate('login');
+      })
+      .catch(error => {
+        console.log(email)
+        console.log(error)
+      })
+  
+      const usuarios = collection(db, "usuarios");
+        setDoc(doc(usuarios, email), {
+        login: login,
+        senha: senha});
+    } else {
+      alert('teste')
+      senha == ""
+    }
+
+    
   }
 
   const navigation = useNavigation();
@@ -48,12 +61,14 @@ export function Registration() {
     navigation.navigate('login');
   }
 
-  function testar(){
-    const usuarios = collection(db, "usuarios");
-     setDoc(doc(usuarios, email), {
-      login: login,
-      senha: senha});
-  }
+  // function validarSenha(){
+  //   if (senha != confirmaSenha) {
+  //     setSenha('')
+
+  //     alert('digite novamente')
+  //     return false;
+  //   } 
+  // }
   return (
 
     <VStack flex={1} p={6} bg='white'>
@@ -75,11 +90,11 @@ export function Registration() {
         </HStack>
     
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
-          <Input onChangeText={(novaSenha) => setSenha(novaSenha)} placeholder="SENHA" mt={4} bg='cor4'/>
+          <Input onChangeText={(novaSenha) => setSenha(novaSenha)} placeholder="SENHA" mt={4} bg='cor4' type='password'/>
         </HStack>
 
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
-          <Input placeholder="CONFIRMAR SENHA" bg='cor4'/>
+          <Input placeholder="CONFIRMAR SENHA" bg='cor4' onChangeText={(confirmaSenha) => setConfirmaSenha(confirmaSenha)} type='password'/>
         </HStack>
 
         <HStack>
@@ -89,9 +104,9 @@ export function Registration() {
         <HStack mt={230}>
           <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={telaLogin}/>
         </HStack>
-        <HStack>
+        {/* <HStack>
           <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={testar}/>
-        </HStack>
+        </HStack> */}
 
       </VStack>
 
