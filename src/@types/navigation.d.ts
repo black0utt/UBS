@@ -6,6 +6,7 @@ export declare global {
             inicio: undefined;
             biometria: undefined;
             solicitarAtendimento: undefined;
+            listarAtendimento: undefined;
         }
     }
 }

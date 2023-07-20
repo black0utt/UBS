@@ -1,9 +1,9 @@
-import { VStack, Input, HStack, IconButton, useTheme, Center} from 'native-base';
+import { VStack, Input, HStack, IconButton, useTheme, Center, FlatList, View} from 'native-base';
 import { SignOut, ChatTeardropText, House} from 'phosphor-react-native';
 // import Logo from '../assets/logo_secondary.svg';
 import {Button} from '../components/Button';
-import {Image, Text, TextInput} from 'react-native';
-import React, {useCallback, useState} from 'react';
+import {Image, ListRenderItemInfo, Text, TextInput} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../firebaseconfig';
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore"; 
+import { collection, doc, getFirestore, setDoc, getDocs, query, getDoc, Firestore } from "firebase/firestore"; 
 
 
 
@@ -28,6 +28,7 @@ export function Registration() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+
 
   
   const handleCreateAcount = async () => {
@@ -61,16 +62,7 @@ export function Registration() {
     navigation.navigate('login');
   }
 
-  // function validarSenha(){
-  //   if (senha != confirmaSenha) {
-  //     setSenha('')
-
-  //     alert('digite novamente')
-  //     return false;
-  //   } 
-  // }
   return (
-
     <VStack flex={1} p={6} bg='white'>
 
       <HStack w="full" justifyContent="space-between" alignItems="center" pb={5} px={50}>
@@ -82,7 +74,7 @@ export function Registration() {
       <VStack flex={1} px={6}>
 
         <HStack w="full" justifyContent="space-between" alignItems="center">
-          <Input onChangeText={(novoEmail) => setEmail(novoEmail)} placeholder="CPF" mt={4} bg='cor4'/>
+          <Input onChangeText={(novoEmail) => setEmail(novoEmail)} placeholder="EMAIL" mt={4} bg='cor4'/>
         </HStack>
 
         <HStack w="full"  justifyContent="space-between" alignItems="center">
@@ -96,7 +88,7 @@ export function Registration() {
         <HStack w="full" mb={4} justifyContent="space-between" alignItems="center">
           <Input placeholder="CONFIRMAR SENHA" bg='cor4' onChangeText={(confirmaSenha) => setConfirmaSenha(confirmaSenha)} type='password'/>
         </HStack>
-
+        
         <HStack>
           <Button onPress={handleCreateAcount} title="Cadastrar" w="full" bg="green.500" borderRadius={100}/>
         </HStack>
@@ -104,9 +96,6 @@ export function Registration() {
         <HStack mt={230}>
           <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={telaLogin}/>
         </HStack>
-        {/* <HStack>
-          <Button title="Login" w="full" bg="green.500" borderRadius={100} onPress={testar}/>
-        </HStack> */}
 
       </VStack>
 

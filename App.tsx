@@ -3,6 +3,8 @@ import { NativeBaseProvider, StatusBar} from 'native-base';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseconfig';
+import { AuthenticationProvider } from './src/AuthenticationContext';
+
 
 // import { useFonts, Roboto_400Regular, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import {
@@ -24,11 +26,18 @@ import { THEME } from './src/styles/theme';
 
 import { Routes} from './src/routes';
 import { Loading } from './src/components/Loading';
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold})
   return (  
-    <NativeBaseProvider theme={THEME}>
+
+
+<AuthenticationProvider>
+<NativeBaseProvider theme={THEME}>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
@@ -36,5 +45,10 @@ export default function App() {
       />
       { fontsLoaded ? <Routes/> : <Loading />}
     </NativeBaseProvider>
+<NavigationContainer>
+    
+</NavigationContainer>
+</AuthenticationProvider>
+    
   );
 }

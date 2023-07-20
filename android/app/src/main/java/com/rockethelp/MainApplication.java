@@ -13,6 +13,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import com.UBS.newarchitecture.MainApplicationReactNativeHost;
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+
 
 import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
@@ -35,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
       List<ReactPackage> packages = new PackageList(this).getPackages();
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
+      packages.add(new ReactNativeFirebaseAppPackage());
       return packages;
     }
 
